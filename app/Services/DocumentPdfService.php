@@ -55,6 +55,7 @@ class DocumentPdfService
             ->showBackground()
             ->format('A4')
             ->margins(8, 8, 10, 8)
+            ->noSandbox()
             ->savePdf($path);
 
         return $path;
@@ -101,6 +102,7 @@ class DocumentPdfService
             ->showBackground()
             ->format('A4')
             ->margins(8, 8, 10, 8)
+            ->noSandbox()
             ->savePdf($path);
 
         return $path;
