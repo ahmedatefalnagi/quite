@@ -51,12 +51,20 @@ class DocumentPdfService
 
         $path = storage_path('app/public/invoice-' . $invoice->id . '.pdf');
 
-        Browsershot::html($html)
+        $browsershot = Browsershot::html($html)
             ->showBackground()
             ->format('A4')
-            ->margins(8, 8, 10, 8)
-            ->noSandbox()
-            ->savePdf($path);
+            ->margins(8, 8, 10, 8);
+
+        if (file_exists('/usr/bin/google-chrome-stable')) {
+            $browsershot->setChromePath('/usr/bin/google-chrome-stable')->noSandbox();
+        } elseif (file_exists('/usr/bin/google-chrome')) {
+            $browsershot->setChromePath('/usr/bin/google-chrome')->noSandbox();
+        } else {
+            $browsershot->noSandbox();
+        }
+
+        $browsershot->savePdf($path);
 
         return $path;
     }
@@ -98,12 +106,20 @@ class DocumentPdfService
 
         $path = storage_path('app/public/quotation-' . $quotation->id . '.pdf');
 
-        Browsershot::html($html)
+        $browsershot = Browsershot::html($html)
             ->showBackground()
             ->format('A4')
-            ->margins(8, 8, 10, 8)
-            ->noSandbox()
-            ->savePdf($path);
+            ->margins(8, 8, 10, 8);
+
+        if (file_exists('/usr/bin/google-chrome-stable')) {
+            $browsershot->setChromePath('/usr/bin/google-chrome-stable')->noSandbox();
+        } elseif (file_exists('/usr/bin/google-chrome')) {
+            $browsershot->setChromePath('/usr/bin/google-chrome')->noSandbox();
+        } else {
+            $browsershot->noSandbox();
+        }
+
+        $browsershot->savePdf($path);
 
         return $path;
     }
