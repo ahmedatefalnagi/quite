@@ -56,10 +56,12 @@ class DocumentPdfService
             ->format('A4')
             ->margins(8, 8, 10, 8);
 
-        if (file_exists('/usr/bin/google-chrome-stable')) {
+        if (file_exists('/usr/bin/chromium')) {
+            $browsershot->setChromePath('/usr/bin/chromium')->noSandbox();
+        } elseif (file_exists('/usr/bin/chromium-browser')) {
+            $browsershot->setChromePath('/usr/bin/chromium-browser')->noSandbox();
+        } elseif (file_exists('/usr/bin/google-chrome-stable')) {
             $browsershot->setChromePath('/usr/bin/google-chrome-stable')->noSandbox();
-        } elseif (file_exists('/usr/bin/google-chrome')) {
-            $browsershot->setChromePath('/usr/bin/google-chrome')->noSandbox();
         } else {
             $browsershot->noSandbox();
         }
